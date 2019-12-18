@@ -1,5 +1,6 @@
 require 'rspec'
 require 'album'
+require 'song'
 
 describe 'Album' do
     before(:each) do
@@ -15,7 +16,6 @@ describe 'Album' do
             expect(Album.all).to(eq([]))
         end
     end
-
     describe('#save') do
         it("saves an album") do
             album4 = Album.new("Cornbread").save
@@ -41,7 +41,7 @@ describe 'Album' do
     end
     describe('#update') do
         it("updates an album by id") do
-            @album3.update("Kind of Blue")
+            @album3.update({name: "Kind of Blue"})
             expect(@album3.name).to(eq("Kind of Blue"))
         end
     end
@@ -53,7 +53,7 @@ describe 'Album' do
     end
     describe('.search') do
         it("searches an album by name") do
-            expect(Album.search("giant")).to(eq(@album1))
+            expect(Album.search(:name, "giant")).to(eq(@album1))
         end
     end
     describe('.sort') do
